@@ -36,11 +36,16 @@ async function fetchStockX(term) {
 
 const server = http.createServer(async (req, res) => {
   if (req.url.startsWith('/offers')) {
-    const term = new URL(req.url, `http://localhost`).searchParams.get('q') || '';
-    const stockx = await fetchStockX(term);
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    return res.end(JSON.stringify({ stockx }));
-  }
+  const term = new URL(req.url, `http://localhost`).searchParams.get('q') || '';
+
+  // buscamos en StockX y en PopMart
+  const stockx  = await fetchStockX(term);
+  const popmart = await fetchPopMart(term);
+
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  return res.end(JSON.stringify({ stockx, popmart }));
+}
+
   res.writeHead(200, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify({ message: 'Cazador de Ofertas is running' }));
 });
