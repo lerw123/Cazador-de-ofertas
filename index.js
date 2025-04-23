@@ -2,6 +2,8 @@
 const http = require('http');
 const axios = require('axios');
 const PORT = process.env.PORT || 3000;
+console.log('▶️ RAPIDAPI_KEY is:', process.env.RAPIDAPI_KEY);
+console.log('▶️ RAPIDAPI_HOST is: stockx1.p.rapidapi.com');
 
 // Tu clave desde Render
 const RAPIDAPI_KEY = process.env.RAPIDAPI_KEY;
